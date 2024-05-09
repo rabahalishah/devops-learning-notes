@@ -487,3 +487,41 @@ echo "hey" && {echo "hi; echo "I am good"}
 ```bash
 echo "heeyyy" >> myFile.txt //this command will append heeyyy in myFile.txt
 ```
+# YAML File:
+YAML means "Yet another markup language"
+YAML "YAML ain't markup language"
+
+There are also other Markup languages such as mark down languages such HTML. Mark up langugaes provide you a child parent relationship.
+
+YAML is simply a data transfer format which can be easily transferable. 
+
+## Serialization & De-serialization:
+Converting the data objects into the series of chunks using the serializer to send it to the YAML fail, database etc.
+And converting back file into data object code is called de-serialization
+
+## working with YAML files
+YAML is case sensitive.
+
+# Key Data Type
+"apple": "I am a red fruit"
+1: "This is rabah's roll number"
+
+# lists
+--- 
+- apple
+- mango 
+- Banana
+- Apple 
+
+# complex data type:
+---
+cities:
+ -Lahore
+ -Rawalpindi
+ -Peshawar
+ -D.I Khan
+ -Faisalabad
+
+
+
+
