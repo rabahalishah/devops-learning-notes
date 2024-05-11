@@ -6,12 +6,14 @@ My Theme: Steeef
 ```bash
 echo $PATH //This command is used to check which directory is used for executables files (Env variables)
 ```
-*****************Linux Commands
+# Linux Commands
+```
 > ls (for list of directories)
 > "ll" or "ls -l" (for detailed list of directories)
 > sudo apt install package_name (use to install latest packages here apt means "Advance package tool manager" and sudo means "superuser do")
-
-********Working with directories
+```
+# Working with directories
+```
 > Man name_of_any_command (this command is used to see the manual of any thing that you will provide. e.g, "man cd" this command will give you the manual of cd command.
 In linux a folder name start with "." will be considered as hidden file. It will be disappeared in GUI. If you want to see all you files whether they are hidden or not then you can use the following comman:
 > ls -a (here -a flag is for all)
@@ -24,10 +26,11 @@ In linux a folder name start with "." will be considered as hidden file. It will
 > rmdir (this command is used to remove the directory of which name the user have provided)
 NOTE: we cannot delete a folder which is not empty
 > rmdir -p folder1/folder2/folder3 (this command "rmdir -p" is used to delete nested folders in one line)
-
-**********Working with files
-// In linux files and folder names are case sensitive.
-// In linux even a directory is considered as file. It is considered as special type of file. But yes, it is considered as a file.
+```
+# Working with files
+In linux files and folder names are case sensitive.
+In linux even a directory is considered as file. It is considered as special type of file. But yes, it is considered as a file.
+```
 > file (this command is used to check the type of the file which you have provided in the argument.
 > touch file_name (this command is used to create empty files of which name is provided as an argument. NOTE: you can create more than one file by providing more than one names at once like >touch file1 file2 file3 (this will create 3 files))
 > rm file_name (this command is used to delete the files. You can delete more than one file at a time)
@@ -38,8 +41,9 @@ NOTE: If you want to copy the file within the same directory then you do not hav
 > cp -r folder_name path newFolderName (this command is used to copy directories. This will also copy the content which is in the directory)
 > mv (this command is used to move and rename a file or folder. Syntax: >mv fileName path newFilename (this will move your file to the given path and will rename it at the same time.)
 > mv fileName NewFileName (this command will only rename your file)
-
-********************Working with file Content
+```
+# Working with file Content
+```
 > head file_name (this command is used to get the first 10 lines of the file)
 > head -5 file_name (this command will onlly bring the first 5 lines. You add any number you want from 1 to 10)
 > tail file_name (this command is used to get the last 10 lines of the files)
@@ -50,9 +54,10 @@ NOTE: If you want to copy the file within the same directory then you do not hav
 > cat filename > newFileName (cat command can also be used to rename the file)
 > more file_name (this command is also used to read the document. But this will print the file per page at a time. Like it will print let say 30% of the content then on pressing space button it will print the next 30% and so on)
 > less file_name (this command is opposite of more.)
-
-***********************System information commands
+```
+# System information commands
 NOTE: Why use these commands? The answer is that when you will be working with the servers then there will not be any GUI then you have to do all things with commands.
+```
 > uptime (this command is used to check how long has been your system is running)
 > free (this command is used to check how much your memory is free and how much your memory is in use)
 > ps -A (tihs command is used to get the snapshot of current running processes)
@@ -61,19 +66,22 @@ NOTE: Why use these commands? The answer is that when you will be working with t
 > lsblk (this command is used to check the list of block devices)
 > top (this command is used to display the linux processes in GUI format within the terminal)
 > htop (this command is the upgraded version of top command and it will give you a better representation of linux processes. if this command is not installed by default then you can download it by using: > sudo apt install htop)
-***************************Networking
+```
+# Networking
+```
 > ifconfig (this command is used to get the network information of your system)
 > ip or ip a (this command is used to show/manipulate routing, network devices.)
-
-***************************Linux Package Manager
-NOTE: There are some operations that linux restrict to their user to perform. In order to perform such actions sudo command is used which is used to execute the command as another user or super user
+```
+# Linux Package Manager
+**NOTE:** There are some operations that linux restrict to their user to perform. In order to perform such actions sudo command is used which is used to execute the command as another user or super user
+```
 > sudo apt update (this command will tell you about the packages which are supposed to update. This command will only tell you. This will not update your packages)
 > sudo apt upgrade (this command will upgrade your packages)
 > sudo apt search package_name (this command is used to search the packages)
 > sudo apt install package_name (this command is used to install the packages)
 > sudo apt remove package_name (this command is used to uninstall the packages)
-
-*********Text editors
+```
+# Text editors
 There are several text editors in linux. While working with server there may be a need to edit files. There you will have to open then in any text editor of your choice with in the terminal and then use it.
 we will learn 2 of them:
 1. Nano
@@ -83,13 +91,13 @@ we will learn 2 of them:
 > Nano file_name (this will simply open up the file in the terminal in insert mode. You simple have to write whatever you want and then press Ctrl+X. This will ask you to save or not. Y for yes and N for No.)
 Now you can verify your changes by using >cat file_name
 
-2)vim
+2) vim
 >sudo apt install vim
 >vim file_name (this will just open your file in vim editor in terminal in read mode. You wont be able to write anything as it is in read mode. To start writing you have to click "i" to enable --insert mode and then to save the changes you have to press escape first to get out of insert mode and then press 	colon ":" and write w so in short write :w and press enter.
 to get exit from vim editor write :q
 To get exit and save file in one command write :wq
 
-************Some other commands
+# Some other commands
 There three roles of a file
 User, group and other (u, g, o)
 
@@ -501,7 +509,7 @@ And converting back file into data object code is called de-serialization
 
 ## working with YAML files
 YAML is case sensitive.
-
+```
 # Key Data Type
 "apple": "I am a red fruit"
 1: "This is rabah's roll number"
@@ -513,15 +521,255 @@ YAML is case sensitive.
 - Banana
 - Apple 
 
-# complex data type:
+# block data type:
 ---
 cities:
- -Lahore
- -Rawalpindi
- -Peshawar
- -D.I Khan
- -Faisalabad
+ - Lahore
+ - Rawalpindi
+ - Peshawar
+ - D.I Khan
+ - Faisalabad
+
+---
+// Method 2: Flow data type Same as above:
+cities:[Lahore, Rawalpindi, Peshawar, D.I khan, Faisalabad]
 
 
+---
+
+# string variables:
+
+fruit: "apple"
+---
+
+bio: |
+ hey may name is Rabah
+
+---
+# writing a single lines in multiple lines
+message: >
+ this will
+ all be 
+ in a single line
+
+---
+message: this will all be in a single line
+---
+# writing a single lines in multiple lines
+  message: >
+    this will
+    all be 
+    in a single line
+
+  ---
+  message: this will all be in a single line
+  ---
+  number: 123456
+  marks: 25.7
+  booleanValueInYAML: No
+  # Boolean Datatypes in YAML for false: n, N, No, no,  False, FALSE, flase
+  # Boolean Datatypes in YAML for true: y, Y, Yes, yes, True, TRUE, true
+
+  ---
+  # Specifying the type
+  zero: !!int 0
+  positiveNum: !!int 547
+  negativeNum: !!int -67
+  binaryNum: !!binary 0b110011
+  OctalNum: !!int 0675
+  hexaNum: !!int 0x45
+  marks: !!float 56.85
+  commanvalue: !!int +540_000
+  ---
+  # floating point number
+
+  marks: !!float 58.4
+  infinite: !!float .inf
+  booleanValue: !!bool Yes
+  message: !!str This is a string bro
+
+  # Null datatypes:
+  surname: !!null Null #or null, NULL, ~
+  ~: This is a null key
+
+  # dates and time:
+  date: !!timestamp 2003-08-30
+  ...
+...
+```
+**NOTE**: Here we have 3 different documents in a single YAML file. Each document is separated by --- and it can be end with using ...
+
+### YAML to JSON:
+**YAML Format:**
+```
+cities:
+ - Lahore
+ - Rawalpindi
+ - Peshawar
+ - D.I Khan
+ - Faisalabad
+```
+
+**JSON:**
+```
+{
+  "cities": [
+    "Lahore",
+    "Rawalpindi",
+    "Peshawar",
+    "D.I Khan",
+    "Faisalabad"
+  ]
+}
+```
 
 
+``` bash
+---
+# Advance Data Types:
+# Nested list
+-
+ - apple
+ - mango
+-
+ - grapes
+ - banana
+-
+
+---
+# In JSON:
+[
+  [
+    "apple",
+    "mango"
+  ],
+  [
+    "grapes",
+    "banana"
+  ],
+  null
+]
+...
+```
+
+```bash
+---
+# nested mapping: map inside a map
+# Key value pairs are called maps
+
+name: Kunal Khushwana
+role:
+  age: 78
+  job: student
+
+---
+#method 2 same as:
+name: Kunal Khushwana
+role: { age: 78, job: student }
+
+---
+#list of arrays inside hashtables:
+
+pairs example: !!pairs
+ - job: student
+ - job: teacher
+
+# In JSON:
+# {
+#   "pairs example": [
+#     [
+#       "job",
+#       "student"
+#     ],
+#     [
+#       "job",
+#       "teacher"
+#     ]
+#   ]
+# }
+---
+# set will allow you to have unique values
+names: !!set
+ ? Hadi
+ ? Rabah
+ ? Wahaj
+ ? Musa
+
+---
+#dictionary:
+# when you want a whole list as a single value
+People: !!omap
+ - Kunal:
+    name: Kunal Khushwaha
+    age: 78
+    position: ase
+ - Rahul:
+    name: Rahul Kawaria
+    age: 65
+    position: devOPs engr
+
+---
+# resuing some properties using anchors here we will not repeat our code
+likings: &likes
+  fav fruit: mango
+  dislikes: grapes
+
+
+person1:
+  name: Rabah Ali Shah
+  <<: *likes
+person2:
+  name: wahaj Ali Shah
+  <<: *likes
+  dislikes: apple
+  # here dislikes will be overriden from grapes to apple for person 2
+person3:
+  name: musa Ali Shah
+  <<: *likes
+```
+
+
+# XML vs JSON vs YAML
+```
+# XML:
+
+<?xml version="1.8" encoding="UTF-8"?>
+<school name="DPS" principal:"someone">
+     <Students>
+         <Student>
+             <name>"Rabah"</name>
+             <rollno>344806</rollno>
+             <marks>85</marks>
+         </Student>
+     </Students>
+ </school>
+
+# JSON
+
+ {
+   "school": [
+     {
+       "name": "DPS",
+       "principal": "someone",
+       "students": [{ "name": "Rabah", "rollno": 344806, "marks": 85 }]
+     }
+   ]
+ }
+
+
+# YAML
+---
+school:
+- name: DPS
+  principal: someone
+  students:
+  - name: Rabah
+    rollno: 344806
+    marks: 85
+
+```
+
+# Tools for working with YAML:
+- **Datree:** Used for validate your YAML
+- **Monokle:** Used for validate kubernetes templates
+- **Lens:** Used to write YAML file for kubernetes using GUI
