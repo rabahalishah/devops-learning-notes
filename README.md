@@ -1,3 +1,74 @@
+# Introduction to DevOps
+# What is devops?
+DevOps is a culture. A devOps engineer job is to improve the delivery time of an application by implementing the automation, making sure the quality, implementing the monitoring and testing the application.
+
+# Why DevOps Engineer?
+Ten year back there were roles like, System Administrator, Build and Release Engineer, Sever Admin. System admin used to create a server, Server engineer creates the application server and do all the testing on Server, Build and release engineer deploy the application to the server.
+This whole process from development to production/delivery requires are manual process that was time taken as the work was divided on different roles. Then DevOps comes into play whose job is to improve the delivery time of an application by implementing the automation, making sure the quality, implementing the monitoring and testing the application.
+
+## SLDC (Software Development Life Cycle)
+When you are developing a product you have to follow some standards. SLDC is a standard that every team has to follow to build a high quality product.
+SLDC contains the following steps:
+
+1) Planning and Requirements: In this phase you do research and find the requirement of the customer. let say you are adding a feature for kids in an e-commerce store. Then you will do all 				your research that for which range of age of kids are high in demand. Then after all you research you create a document called "Software requirement 					specification document"
+2) Defining: In this stage, you define that what you are going to achieve on the basis of the Software requirement specification document". Let say you define that in summers your kids 		section should be highly available and scalable.
+3) Designing: This phase has 2 stages. High Level Design and Low Level Design. HLD: Here you design the architect of your product in a higher level view. LLD: Here you define that which tech 		stack that you are going to use. How your DB will look like etc.
+4) Building/Developing: After desiging, Developers start developing the product, store in local repository and then finally push to git centralised repository.
+5) Testing: QA engineers test the code. 
+6) Deployment: And then the product is finally deployed.
+
+DevOps role comes into picture for Building, Testing and Deployment. DevOps engineer role is to increase the efficiency of these three phases. Efficiency can be increase by automating these processes. Making the development, testing and deployment part smooth.
+
+**NOTE:** In most of the companies Agile methodology is followed. In which we work in sprints, We dont wait for one phase to complete. Once the part of a phase has completed, we start working on other phase. All phases are running in parallel. 
+
+**What are Virtual machines?**
+Lets understand them with an example. let say you have a land of 1 acre and you live a very luxurious life there. After some time you realised that you are only using 1/2 acre and the other 1/2 acre is spare. So you thought to give that other 1/2 acre on rent. Now without disturbing your luxurious life you have gave 1/2 of it on the rent. Now you are using your land efficiently. As we know DevOPs is all about efficiency. Here, In case of servers, Let say AWS setup their Data center in Pakistan. Their server is of let say 100GB and have 100 cores. They installed a hypervisor (Hypervisor is a software that we used to logically divide the system into our desired chunks). Here with the help of Supervisors such and VMware or Xen. We have logically divided our 100GB server into 10GB 10Cores 10 mini servers. Now these servers will be used by millions of users. 
+Now let say someone from US request for a virtual machine of the requirement having 5GB and 2 cores to AWS. The AWS will ask the hypervisor and will look for which partition is idle. Then it will give access to the user to that idle server. This will act as a virtual machine as Physically I dont own any physical server. I am just using it virtually and paying for it.
+
+Same way in your PC you can use virtual box of oracle. And you can give remote access to that virtual box to any member of your family. Here 2 members are using the same laptop. One is physically using and one is remotely accessing some of its part via virtual box.
+
+**NOTE:** Remember that, every logical partitiion is complete system in its own way. It has its own memory, storage, processor etc.
+
+## Difference between physical server and Virtual server/machine:
+
+**Physical Server:** A physical server is a tangible piece of hardware, typically a computer or server machine, that houses the CPU, memory, storage drives, and other components needed to run an operating system and applications.
+**Virtual Server:** A virtual server, also known as a virtual machine (VM), is an emulated computer system created by software (hypervisor) that partitions physical hardware resources of a single physical server into multiple virtual environments. Each virtual server runs its own operating system and applications, sharing the underlying physical resources with other virtual servers.
+
+**Resource Allocation:**
+Physical Server: Resources such as CPU, memory, storage, and network bandwidth are dedicated solely to the physical server and are not shared with other servers.
+Virtual Server: Resources are dynamically allocated and can be shared among multiple virtual servers running on the same physical hardware. Resource allocation can be adjusted as needed to meet the demands of each virtual server.
+
+**Flexibility and Scalability:**
+Physical Server: Scaling a physical server typically involves adding more hardware components, such as CPU, memory, or storage, which can be a time-consuming and costly process.
+Virtual Server: Virtual servers offer greater flexibility and scalability. Additional virtual servers can be created or existing ones can be resized (allocated more or fewer resources) with relative ease, without requiring additional physical hardware.
+
+**Isolation and Security:**
+Physical Server: Each physical server operates independently, providing strong isolation between applications and potentially higher levels of security.
+Virtual Server: Virtual servers share physical hardware resources, which introduces a degree of resource contention and potential security risks if not properly configured. However, modern virtualization technologies offer robust isolation mechanisms to mitigate these risks.
+
+**Management and Maintenance:**
+Physical Server: Managing and maintaining physical servers involve tasks such as hardware installation, firmware updates, and troubleshooting hardware failures.
+Virtual Server: Virtual servers can be managed and provisioned using software tools, allowing for centralized management, automated deployment, and easier backup and recovery processes.
+
+## How to create and automate VM
+As we have discussed above that we make request (which should be valid, authenticated and authorized) to the cloud providers such as AWS, Azure or Google plateform to create VM. In terms of AWS it is called EC2 instance. This is also called code infrastructure. We simply make request to these cloud service providers and they create the instances using hypervisor and then generate IP address and all the information to get access to this EC2 instance. The procedure and concept is same for all service providers.
+
+Let say someone ask you how can you automate the cloud infrastructure?
+you have to write an automation script You can do that in the following ways:
+For AWS there are 4 ways:
+AWS CLI: Here you can automate the process using CLI
+AWS API: AWS also generate the API so that you can interact with it. e.g in python you can use BOTO3 to use AWS API
+AWS CFT: Cloud Formation template. AWS CloudFormation simplifies provisioning and management on AWS. You can create templates for the service or application architectures you want and have 	AWS CloudFormation use those templates for quick and reliable provisioning of the services or applications (called “stacks”).
+AWS CDK: AWS Cloud development Kit.
+
+There is another option that you can use is "Terraform"
+Terraform can be used to automate and manage any cloud infrastructure of any cloud service provider. But if your use case is only AWS then AWS CDK is better than Terraform.
+
+
+## Hybrid cloud model
+There is another cloud model called Hybrid. In this cloud code infrasturture we have used more than one cloud service. For example: google cloud platform is very famous for AI/ML so we can deploy that part on GCP and other on AWS or Azure etc. 
+
+
 # Complete Linux Course
 How to install Zsh and configure its themes
 --> https://phoenixnap.com/kb/install-zsh-ubuntu
@@ -773,3 +844,49 @@ school:
 - **Datree:** Used for validate your YAML
 - **Monokle:** Used for validate kubernetes templates
 - **Lens:** Used to write YAML file for kubernetes using GUI
+
+# Docker
+## Why Docker?
+What was the problem that docker came into existance?
+In early stages, only one application can be run on a server. If you have multiple applications then you would have multiple servers to run those applications. VMware was the company that solved this problem by creating virtual machines. But there was also a problem with virtual machines. Virtual machines also requires their own OS and we know that OS requires its own dedicated hardware and other resources. This was the problem.
+### Architecture of Virtual machines
+
+App 1      |   App 2    |   App 3    |
+bin/lib    |  bin/lib   |  bin/lib   |
+Guest OS 1 | Guest OS 2 | Guest OS 3 |
+              Hypervisor
+Your Local Host Machine / Database Server / Cloud
+
+
+**HYPERVISOR**: Hypervisor is program that creates virtual machines on your local host and manage the resource and hardware.
+Now here as you can see in case of virtual machines we have 3 VMs and 3 separated OS.
+
+Moreover, Let say you have built an application and you want to send it to your friend. Your friend says that this application is not running on my PC as it is requiring x version and blah blah. To solve such problem we have "**containers**"
+
+## Architecture of Containers
+
+App 1      |   App 2    |   App 3    |
+bin/lib    |  bin/lib   |  bin/lib   |
+           Container Engine
+              Single OS
+Your Local Host Machine / Database Server / Cloud
+
+Here you can see we have single OS and a container engine that is managing all different applications on a single machine.
+
+Its same as shipping the application to the friend in a conatiner that will contain all the resources that will be required to run that application. This container will make sure that the application run correctly in the friends machine.
+
+Now Docker is a tool/Container Platform that helps us creating, managing and scaling containers.
+
+# Docker Architecture
+
+3. Orchestration
+2. Engine
+1. Runtime
+
+
+
+**Runtime:** Containes runc, and Containerd. Runc is responsible for turning ON and OFF the container. Containerd is responsible for managing container
+**Engine:** Here we communication with the server using Docker CLI using APIs
+**Orchestration:** In orchestration, in simple we manage containers. We can scale our application to more containers let say it is currently running in 10k containers we want to scale it into 20k. Moreover, Let say our application wants to update to v2 then instead of stopping the application and then updating it we can smoothly do it in less time using orchestration engine. Which is also provided by Kubernetes.
+
+
