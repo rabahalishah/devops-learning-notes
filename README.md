@@ -1030,3 +1030,19 @@ docker build -t myfirstimage
 ```
 
 Congrats! you have made it
+
+# More on Dockers Engine Architecture
+        Docker Client
+            Daemon 
+            Conainterd
+/             |          \
+shim         shim      shim
+runc         runc      runc
+container container container
+
+
+when you write commands from docker command CLI its ask Daemon which calls containerd which is a high level runtime it manages the runc and runc manages the container. Here Shim allows us to run the containers even the daemons are down. This is called daemonless containers.
+
+
+
+
