@@ -873,6 +873,7 @@ Your Local Host Machine / Database Server / Cloud
 
 Here you can see we have single OS and a container engine that is managing all different applications on a single machine.
 
+Containers are isolated environments that runs application in isolated environment.
 Its same as shipping the application to the friend in a conatiner that will contain all the resources that will be required to run that application. This container will make sure that the application run correctly in the friends machine.
 
 Now Docker is a tool/Container Platform that helps us creating, managing and scaling containers.
@@ -883,10 +884,149 @@ Now Docker is a tool/Container Platform that helps us creating, managing and sca
 2. Engine
 1. Runtime
 
-
-
 **Runtime:** Containes runc, and Containerd. Runc is responsible for turning ON and OFF the container. Containerd is responsible for managing container
 **Engine:** Here we communication with the server using Docker CLI using APIs
 **Orchestration:** In orchestration, in simple we manage containers. We can scale our application to more containers let say it is currently running in 10k containers we want to scale it into 20k. Moreover, Let say our application wants to update to v2 then instead of stopping the application and then updating it we can smoothly do it in less time using orchestration engine. Which is also provided by Kubernetes.
 
+# Docker File and Docker Image
+Let say you are eat noodles and your friend who is in another city wants to taste them. So what would you do is that you will send him the recipe to make that dish. Here the recipe is like set of instructions to create that dish. Now Imagine that dish as an application and recipe as the set of instruction to create the application in a container.
+Here the file that contains the set of instruction is called docker file. And the application that will be created by following those instruction will be called as Docker Images. Which will run on containers. 
+Containers are the instance of running images of the application. 
 
+If you have an application that you want to containerize then you have to write a docker file that will create docker images that will run on container.
+- Assume Docker files are the set of instructions to create that file
+- Assume Docker images as Template/Class
+- Assume Docker Containers as Instance of the class/Objects
+
+Docker Files --> Docker Images --> Container
+
+# OCI (Open Container Initiative
+We have various runtime to run container, Which one we should use to run images. To answer that we have OCI which have defined some standards on the bases of Docker file specifications and docker image specifications which we have to follow. On top of that we can do what we want.
+
+# Docker Commands
+First download and install docker from their official website 
+
+```bash
+docker run hello-word //this command can be used to check whether you docker has correctly installed or not.
+```
+This command means that "run that image to create the container" Here hello-word is an image name. Here this above command went to the docker hub and dowloaded that image "hello-world" from docker hub and ran it into my PC.
+
+```bash
+docker images // this command is used to check all downloaded images in your local machine
+```
+```bash
+docker container ls // this command is used to check all downloaded containers in your local machine
+```
+```bash
+docker pull mysql // this command is used to download images without running them in a container
+```
+```bash
+docker pull ubuntu:16.04 // this command is used to download specifc version of the image
+```
+```bash
+docker run -it ubuntu:16.04 // here -it flag means interactive environment. This will keep the image running in the background. You have to manaully get exit from the image.
+```
+```bash
+docker ps // this command is used to check which docker containers are currently running
+```
+```bash
+docker ps -a // this command will also tell you about the process that has been stopped
+```
+```bash
+docker rm container_Id // this command will remove the history of that container from the log
+```
+```bash
+docker rmi image_Id or image_name // this command will remove image
+```
+```bash
+docker stop container_Id // this command is used to stop the running container
+```
+```bash
+docker inspect image_name / image_id // this command is used get all the details about image
+```
+```bash
+docker stop  container_id // this command is used get all the logs of your container
+```
+```bash
+docker container prune -f // this command is used to delete all the containers that are stopped. Here -f means force. Dont ask again. Just do it
+```
+```bash
+docker run alpine ping www.google.com // this command is using alpine OS and then running ping command to check the ping of google.com
+```
+```bash
+docker run -d alpine ping www.google.com // this will exactly as above but it will do in the background 
+```
+```bash
+docker logs container_id // this will show all the logs of the container
+```
+```bash
+docker images -q // to get all the ids of images
+```
+```bash
+docker images -q --no-trunc // to get all the SHA256 ids of images
+```
+```bash
+docker rmi -f $(docker images -q) // this will delete all your images
+```
+
+# Connecting two containers
+```bash
+docker exec -it container_Id bash // here you have to provide the container Id of the container that is currently running and you want to attached the bash with it. Means that two bash will be run in the same container so that the container could interact with each other.
+```
+
+# Docker Commits: How to create a new image out of an image
+Let say you have ran your container. Let say you ran ubuntu OS and created a file in that OS in a container. But if you create another container then that file wont be available there. So make it accessible for anybody you can create its new image using commit messages.
+
+```bash
+> docker start container_id / here start your container on which you had created name.txt file. Provide its containder_id
+> docker commit -m "Added names.txt file" container_id my_firts_image:1.01  // now here provide the id of the container of which new Image you wanna create.
+```
+here :0.01 is the version of the image that I have created
+
+## HOW Docker RUN works:
+When we run > docker run image_name . Then Docker ask the docker daemon that is this image is locally installed in my PC? If yes, then run it. If NO, then download it from online registry (docker hub). This will download that image and will create a container and will run that image. 
+
+Docker is very helpful and time saving hackathons. Where if you dont want to download any tool or software then you can use its intance using the images of docker availble on Docker hub. For example: docker run mysql etc.
+
+## HOW Docker is running the images in a container?
+
+As we have discussed above that Images are basically instances/templates that runs in a container. Images also contains OS files. Even the dependencies of the software which are required to run that software. Docker uses the Docker engine to communicate with our local hardware. This is how Docker container runs an image.
+
+
+## How to access containers locally on your machine
+```bash
+docker -d -p port 8080:80 nginx
+```
+here -d is for detach..means run in background. -p means foward port. 8080 is the Port that I am providing. 80 is the defualt port of nginx. You can git default ports by googling it.
+Here, after runnin this command if you would go to your browser and will search localhost:8080 then you have running nginx on your local host from the port you had provided.
+
+# Layers
+All images are basically built in layers. Docker is smart enough that it downloads the images in the form of layers and each layer contains its own unique id. What is the reason of doing this all? The reason is that if let say there are two images show use same files/layers. Then does it make sense to download those files again and again when downloading the new image? The answer is NO. So Docker so the same. Therefore, it downloads each image in the form of layer so that in case of any layer that is used by the other image it do not download it. This is what that makes docker fast.
+You can check how many layers an image is containing by using the following command:
+```
+docker inspect image_id / image_name
+```
+
+# How to create your own Dockerfiles and images and upload it on registry?
+Go to your CMD
+```bash
+docker login //then provide credentials
+```
+```bash
+vim Dockerfile //creating docker file
+```
+**NOTE:** Its a convention to use Dockerfile name with no extension
+
+```bash
+//inside Dockerfile
+
+FROM alpine
+RUM sudo apt-get update
+CMD ["echo","My name is Rabah Ali Shah"]
+```
+
+```bash
+docker build -t myfirstimage
+```
+
+Congrats! you have made it
