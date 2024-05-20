@@ -968,6 +968,12 @@ docker images -q --no-trunc // to get all the SHA256 ids of images
 ```bash
 docker rmi -f $(docker images -q) // this will delete all your images
 ```
+```bash
+docker run -p host_port:container_port image_name
+ or
+docker run -p 8080:80 my_docker_image //8080:80 specifies that port 8080 on the host machine should be mapped to port 80 on the container
+
+```
 
 # Connecting two containers
 ```bash
@@ -1042,6 +1048,101 @@ container container container
 
 
 when you write commands from docker command CLI its ask Daemon which calls containerd which is a high level runtime it manages the runc and runc manages the container. Here Shim allows us to run the containers even the daemons are down. This is called daemonless containers.
+
+# Writing Docker File
+
+**Name Convention:** Dokerfile
+
+**NOTE:** Imagine while writing Dockerfile is that you are writing steps to install the application on any machine. Always refer dockers official documentation for help
+
+Below are some sample Docker files:
+
+**Syntax:** INSTRUCTION arguments
+
+```bash
+# using alpine as base image
+FROM alpine:3.18
+
+# installing curl
+RUN apk add curl
+
+# setting word directory as downloads
+WORKDIR /downloads
+
+# adding user as rabahalishah
+RUN adduser -D rabahalishah
+
+# setting the current user as rabahalishah
+USER rabahalishah
+```
+Building the docker File: docker build -t myimage
+Verifying the dockerfile: docker run myimage whoami
+
+
+```bash
+# using alpine as base image
+FROM mcr.microsoft.com/powershell
+
+# creating directory namely demo
+RUN mkdir -p /demo
+
+# setting shell to the powershell as our base image is windows and in windows we use either cmr or powershell
+SHELL ["pwsh", "-command"]
+
+# adding user as rabahalishah
+RUN "hello world!" | Out-File -Path /demo/message.txt
+```
+Building the docker File: docker build -t myimage
+Verifying the dockerfile: docker run myimage
+
+```bash
+# using python as base image
+FROM python
+
+# setting the working directory as code
+WORKDIR /code
+
+# defining anv variable
+ENV app_host = 0.0.0.0
+
+# defining another environment variable
+ENV app_port = 5000 
+```
+
+Building the docker File: docker build -t myimage
+Verifying the dockerfile: docker run myimage env
+
+localhost:8080
+
+```bash
+# using python as base image
+FROM python
+
+# setting the working directory as code
+WORKDIR /code
+
+# copying app.py to code folder
+COPY app.py /code/
+
+# copying the myfile.txt from the link
+ADD https://www.abc.com/myfile.txt .
+
+# Exposing this container to run at 5000 port
+EXPOSE 5000
+```
+Building the docker File: docker build -t myimage
+Verifying the dockerfile: docker run myimage ls /code
+
+Verifying the dockerfile: docker run -it -d -p 8080:5000 myimage ls /code
+
+## commands like npm run dev
+CMD ["executable", "parameter 1", "parameter 2"
+CMD ["npm", "run", "dev"]
+
+
+
+
+
 
 
 
