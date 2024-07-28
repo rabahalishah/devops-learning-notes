@@ -2963,3 +2963,178 @@ In essence, CSMA/CD deals with problems after they occur, while CSMA/CA tries to
 - **Function**: Translates domain names into IP addresses, allowing users to access websites using human-readable addresses.
 
 These protocols and their associated port numbers are fundamental to the functioning of networks and the internet, facilitating various types of communication and data transfer.
+
+
+# Chapter 03: Virtualization:
+```markdown
+# What is Virtualization?
+
+Virtualization is technology that you can use to create virtual representations of servers, storage, networks, and other physical machines. Virtual software mimics the functions of physical hardware to run multiple virtual machines simultaneously on a single physical machine. Businesses use virtualization to use their hardware resources efficiently and get greater returns from their investment. It also powers cloud computing services that help organizations manage infrastructure more efficiently.
+
+# Why is virtualization important?
+
+By using virtualization, you can interact with any hardware resource with greater flexibility. Physical servers consume electricity, take up storage space, and need maintenance. You are often limited by physical proximity and network design if you want to access them. Virtualization removes all these limitations by abstracting physical hardware functionality into software. You can manage, maintain, and use your hardware infrastructure like an application on the web.
+
+# Virtualization example
+
+Consider a company that needs servers for three functions:
+
+1. Store business email securely
+2. Run a customer-facing application
+3. Run internal business applications
+
+Each of these functions has different configuration requirements:
+
+- The email application requires more storage capacity and a Windows operating system.
+- The customer-facing application requires a Linux operating system and high processing power to handle large volumes of website traffic.
+- The internal business application requires iOS and more internal memory (RAM).
+
+To meet these requirements, the company sets up three different dedicated physical servers for each application. The company must make a high initial investment and perform ongoing maintenance and upgrades for one machine at a time. The company also cannot optimize its computing capacity. It pays 100% of the servers’ maintenance costs but uses only a fraction of their storage and processing capacities.
+
+### Efficient hardware use
+
+With virtualization, the company creates three digital servers, or virtual machines, on a single physical server. It specifies the operating system requirements for the virtual machines and can use them like the physical servers. However, the company now has less hardware and fewer related expenses.
+
+### Infrastructure as a service
+
+The company can go one step further and use a cloud instance or virtual machine from a cloud computing provider such as AWS. AWS manages all the underlying hardware, and the company can request server resources with varying configurations. All the applications run on these virtual servers without the users noticing any difference. Server management also becomes easier for the company’s IT team.
+
+# What is virtualization?
+
+To properly understand Kernel-based Virtual Machine (KVM), you first need to understand some basic concepts in virtualization. Virtualization is a process that allows a computer to share its hardware resources with multiple digitally separated environments. Each virtualized environment runs within its allocated resources, such as memory, processing power, and storage. With virtualization, organizations can switch between different operating systems on the same server without rebooting.
+
+Virtual machines and hypervisors are two important concepts in virtualization.
+
+### Virtual machine
+
+A virtual machine is a software-defined computer that runs on a physical computer with a separate operating system and computing resources. The physical computer is called the host machine and virtual machines are guest machines. Multiple virtual machines can run on a single physical machine. Virtual machines are abstracted from the computer hardware by a hypervisor.
+
+### Hypervisor
+
+The hypervisor is a software component that manages multiple virtual machines in a computer. It ensures that each virtual machine gets the allocated resources and does not interfere with the operation of other virtual machines. There are two types of hypervisors.
+
+#### Type 1 hypervisor
+
+A type 1 hypervisor, or bare-metal hypervisor, is a hypervisor program installed directly on the computer’s hardware instead of the operating system. Therefore, type 1 hypervisors have better performance and are commonly used by enterprise applications. KVM uses the type 1 hypervisor to host multiple virtual machines on the Linux operating system.
+
+#### Type 2 hypervisor
+
+Also known as a hosted hypervisor, the type 2 hypervisor is installed on an operating system. Type 2 hypervisors are suitable for end-user computing.
+
+# What are the benefits of virtualization?
+
+Virtualization provides several benefits to any organization:
+
+### Efficient resource use
+
+Virtualization improves hardware resources used in your data center. For example, instead of running one server on one computer system, you can create a virtual server pool on the same computer system by using and returning servers to the pool as required. Having fewer underlying physical servers frees up space in your data center and saves money on electricity, generators, and cooling appliances.
+
+### Automated IT management
+
+Now that physical computers are virtual, you can manage them by using software tools. Administrators create deployment and configuration programs to define virtual machine templates. You can duplicate your infrastructure repeatedly and consistently and avoid error-prone manual configurations.
+
+### Faster disaster recovery
+
+When events such as natural disasters or cyberattacks negatively affect business operations, regaining access to IT infrastructure and replacing or fixing a physical server can take hours or even days. By contrast, the process takes minutes with virtualized environments. This prompt response significantly improves resiliency and facilitates business continuity so that operations can continue as scheduled.
+
+# How does virtualization work?
+
+Virtualization uses specialized software, called a hypervisor, to create several cloud instances or virtual machines on one physical computer.
+
+### Cloud instances or virtual machines
+
+After you install virtualization software on your computer, you can create one or more virtual machines. You can access the virtual machines in the same way that you access other applications on your computer. Your computer is called the host, and the virtual machine is called the guest. Several guests can run on the host. Each guest has its own operating system, which can be the same or different from the host operating system.
+
+From the user’s perspective, the virtual machine operates like a typical server. It has settings, configurations, and installed applications. Computing resources, such as central processing units (CPUs), Random Access Memory (RAM), and storage appear the same as on a physical server. You can also configure and update the guest operating systems and their applications as necessary without affecting the host operating system.
+
+### Hypervisors
+
+The hypervisor is the virtualization software that you install on your physical machine. It is a software layer that acts as an intermediary between the virtual machines and the underlying hardware or host operating system. The hypervisor coordinates access to the physical environment so that several virtual machines have access to their own share of physical resources.
+
+For example, if the virtual machine requires computing resources, such as computer processing power, the request first goes to the hypervisor. The hypervisor then passes the request to the underlying hardware, which performs the task.
+
+The following are the two main types of hypervisors.
+
+#### Type 1 hypervisors
+
+A type 1 hypervisor—also called a bare-metal hypervisor—runs directly on the computer hardware. It has some operating system capabilities and is highly efficient because it interacts directly with the physical resources.
+
+#### Type 2 hypervisors
+
+A type 2 hypervisor runs as an application on computer hardware with an existing operating system. Use this type of hypervisor when running multiple operating systems on a single machine.
+
+# What are the different types of virtualization?
+
+You can use virtualization technology to get the functions of many different types of physical infrastructure and all the benefits of a virtualized environment. You can go beyond virtual machines to create a collection of virtual resources in your virtual environment.
+
+### Server virtualization
+
+Server virtualization is a process that partitions a physical server into multiple virtual servers. It is an efficient and cost-effective way to use server resources and deploy IT services in an organization. Without server virtualization, physical servers use only a small amount of their processing capacities, which leave devices idle.
+
+### Storage virtualization
+
+Storage virtualization combines the functions of physical storage devices such as network attached storage (NAS) and storage area network (SAN). You can pool the storage hardware in your data center, even if it is from different vendors or of different types. Storage virtualization uses all your physical data storage and creates a large unit of virtual storage that you can assign and control by using management software. IT administrators can streamline storage activities, such as archiving, backup, and recovery, because they can combine multiple network storage devices virtually into a single storage device.
+
+### Network virtualization
+
+Any computer network has hardware elements such as switches, routers, and firewalls. An organization with offices in multiple geographic locations can have several different network technologies working together to create its enterprise network. Network virtualization is a process that combines all of these network resources to centralize administrative tasks. Administrators can adjust and control these elements virtually without touching the physical components, which greatly simplifies network management.
+
+The following are two approaches to network virtualization.
+
+#### Software-defined networking
+
+Software-defined networking (SDN) controls traffic routing by taking over routing management from data routing in the physical environment. For example, you can program your system to prioritize your video call traffic over application traffic to ensure consistent call quality in all online meetings.
+
+#### Network function virtualization
+
+Network function virtualization technology combines the functions of network appliances, such as firewalls, load balancers, and traffic analyzers that work together, to improve network performance.
+
+### Data virtualization
+
+Modern organizations collect data from several sources and store it in different formats. They might also store data in different places, such as in a cloud infrastructure and an on-premises data center. Data virtualization creates a software layer between this data and the applications that need it. Data virtualization tools process an application’s data request and return results in a suitable format. Thus, organizations use data virtualization solutions to increase flexibility for data integration and support cross-functional data analysis.
+
+### Application virtualization
+
+Application virtualization pulls out the functions of applications to run on operating systems other than the operating systems for which they were designed. For example, users can run a Microsoft Windows application on a Linux machine without changing the machine configuration. To achieve application virtualization, follow these practices:
+
+- **Application streaming** – Users stream the application from a remote server, so it runs only on the end user's device when needed.
+- **Server-based application virtualization** – Users can access the remote application from their browser or client interface without installing it.
+- **Local application virtualization** – The application code is shipped
+
+
+### Desktop Virtualization Explained in Simple Terms
+
+Desktop virtualization is a technology that allows you to run different desktop operating systems (like Windows, Linux, or MacOS) on a single physical computer or from a remote server. Here's an easy way to understand it:
+
+#### Imagine Your Computer is a Building
+
+1. **Your Physical Computer is a Building**: Think of your physical computer as a building with many rooms.
+2. **Virtual Desktops are the Rooms**: Each room in the building can be set up differently. One room might have a Windows setup, another might have a Linux setup, and so on.
+3. **Virtualization Software is the Architect**: This software designs and manages these rooms, making sure each one runs smoothly without interfering with the others.
+
+#### Types of Desktop Virtualization
+
+1. **Local Desktop Virtualization**:
+   - **How It Works**: You create virtual desktops (rooms) directly on your physical computer (building).
+   - **Example**: You might have a Windows virtual desktop running on your Mac computer. You can switch between your Mac and Windows environments as if you’re moving between different rooms in the same building.
+
+2. **Virtual Desktop Infrastructure (VDI)**:
+   - **How It Works**: The virtual desktops are hosted on a remote server (a separate, large building), and you access them via your local device.
+   - **Example**: Your company provides you with a virtual desktop that you can access from your home computer. The virtual desktop looks and feels like your work computer, but it's actually running on a server in your company's data center.
+
+#### Benefits of Desktop Virtualization
+
+1. **Flexibility**: Run different operating systems and applications on the same physical computer without needing separate hardware.
+2. **Cost Savings**: Save money by reducing the need for multiple physical computers. Virtual desktops can share the same hardware resources.
+3. **Easy Management**: IT administrators can easily manage and update virtual desktops from a central location, reducing the time and effort needed for maintenance.
+4. **Remote Access**: Users can access their virtual desktops from anywhere, making remote work and collaboration easier.
+
+#### Simple Example
+
+- **Scenario**: You have a team of designers, developers, and customer service agents.
+- **Solution with Desktop Virtualization**:
+  - Designers get a virtual desktop with powerful graphics software on a Windows setup.
+  - Developers get a virtual desktop with a Linux setup and development tools.
+  - Customer service agents get a virtual desktop with basic software on a Windows setup.
+
+All these virtual desktops can run on a single physical server, and each team member can access their specific virtual desktop from any device, anywhere.
