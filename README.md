@@ -3278,6 +3278,11 @@ docker inspect <container_id>
 copy the ip address and export port (2375)
 ```
 
+## Using my Jenkins Python Agent
+```
+docker pull devopsjourney1/myjenkinsagents:python
+```
+
 So you will get tcp://172.19.0.2:2375
 
 # How to create a jenkins cloud agent
@@ -3306,9 +3311,65 @@ simple open you free style project and click on configure and check the 'Restric
 ![image](https://github.com/user-attachments/assets/e2aff240-992b-4559-a2be-eea3a288442e)
 
 
+Now simply run your script in the script tag.
 
 
-## Using my Jenkins Python Agent
+# Practice Task 4: Running Jenkins pipeline on git repo using genkins cloud agent:
+
+Go to the dashboard > add item > pipeline 
+
+provide your repo
+
+Now in script tag you have to either give GROOVY or YAML:
+
+Groovy script:
+
+```bash
+pipeline {
+    agent { 
+        node {
+            label 'my_first_jenkins_docker_cloud_agent' // here your cloud label will go
+            }
+      }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                echo "doing build stuff.."
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                echo "doing test stuff.."
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Deliver....'
+                sh '''
+                echo "doing delivery stuff.."
+                '''
+            }
+        }
+    }
+}
 ```
-docker pull devopsjourney1/myjenkinsagents:python
-```
+
+**NOTE:** The good practice is that you should provide a pipeline file that will be in your git repo instead of providing the hard coded pipeline in the script section.
+
+To provide the file you have to select:
+
+'Pipeline script from SCM' SCM means source control management
+
+then provide git repo link.
+
+
+## auto-trigger feature on jenkins
+**NOTE:** If you want to run you commands on push your code to git. Then look for PollSCM and provide the time there. This would be the after which pipeline will be trigger again on pushing the code to repo.
+
+If you want to give 5 min timer then you have that like this: */5 * * * *
