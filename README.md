@@ -2966,7 +2966,7 @@ These protocols and their associated port numbers are fundamental to the functio
 
 
 # Chapter 03: Virtualization:
-```markdown
+
 # What is Virtualization?
 
 Virtualization is technology that you can use to create virtual representations of servers, storage, networks, and other physical machines. Virtual software mimics the functions of physical hardware to run multiple virtual machines simultaneously on a single physical machine. Businesses use virtualization to use their hardware resources efficiently and get greater returns from their investment. It also powers cloud computing services that help organizations manage infrastructure more efficiently.
@@ -3138,3 +3138,177 @@ Desktop virtualization is a technology that allows you to run different desktop 
   - Customer service agents get a virtual desktop with basic software on a Windows setup.
 
 All these virtual desktops can run on a single physical server, and each team member can access their specific virtual desktop from any device, anywhere.
+
+# Chapter Jenkins:
+**NOTE:** Copied some content from devopsjourney1/jenkins-101
+
+Think jenkins as person who have a PC. You will provide your Source code to him. He will run commands on it that you will provide to it either in YAML or GROOVY format (those files would called pipelines). 
+
+# Installation
+Here we are using jenkins Image and will be running it in a docker container. Therefore, we are first building the Jenkins Image. It is a good practice to run jenkins in a container. By running it into a container is same as running jenkins in another PC and all your projects and pipline scripts will be run in that container. Therefore, you first have to setup and install all packages in container before running the project.
+
+## STEP 1: Create a Dockerfile:
+To build the image we will be needed a Docker file which you can create and paste the following content in it:
+
+```bash
+FROM jenkins/jenkins:2.414.2-jdk11
+USER root
+RUN apt-get update && apt-get install -y lsb-release python3-pip
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+  https://download.docker.com/linux/debian/gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+  https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+RUN apt-get update && apt-get install -y docker-ce-cli
+USER jenkins
+RUN jenkins-plugin-cli --plugins "blueocean:1.25.3 docker-workflow:1.28"
+```
+
+## STEP 2: Build the Jenkins BlueOcean Docker Image (or pull and use the one I built)
+```
+docker build -t myjenkins-blueocean:2.414.2 .
+
+#IF you are having problems building the image yourself, you can pull from my registry (It is version 2.332.3-1 though, the original from the video)
+
+docker pull devopsjourney1/jenkins-blueocean:2.332.3-1 && docker tag devopsjourney1/jenkins-blueocean:2.332.3-1 myjenkins-blueocean:2.332.3-1
+```
+
+## STEP 3: Create the network 'jenkins'
+```
+docker network create jenkins
+```
+
+## STEP 4: Run the Container
+### MacOS / Linux
+```
+docker run --name jenkins-blueocean --restart=on-failure --detach \
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 \
+  --publish 8080:8080 --publish 50000:50000 \
+  --volume jenkins-data:/var/jenkins_home \
+  --volume jenkins-docker-certs:/certs/client:ro \
+  myjenkins-blueocean:2.414.2
+```
+
+### Windows
+```
+docker run --name jenkins-blueocean --restart=on-failure --detach `
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 `
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 `
+  --volume jenkins-data:/var/jenkins_home `
+  --volume jenkins-docker-certs:/certs/client:ro `
+  --publish 8080:8080 --publish 50000:50000 myjenkins-blueocean:2.414.2
+```
+
+
+## Get the Password
+```
+docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+## STEP 5: Connect to the Jenkins
+```
+https://localhost:8080/
+```
+
+## Installation Reference:
+https://www.jenkins.io/doc/book/installing/docker/
+
+# Practice Task 1: Running scripts in Jenkins:
+Go to the dashboard > items > new items > free style projects
+
+create a free style project and simply give it a script and click on build now. Here you will know how jenkins can run scripts etc.
+
+All things are self descripting you just have to check some point and have to provide some information. 
+
+![image](https://github.com/user-attachments/assets/a3049139-63fe-44f5-b52c-86e9b63fed36)
+
+![image](https://github.com/user-attachments/assets/d1114e5d-e422-4e2e-86f3-6c2225c33efb)
+
+
+
+
+# Practice Task 2: Running Python scripts from a git repo in Jenkins:
+
+Provide the link of git repo
+provide credentials if repo is private.
+
+and again run the script.
+
+![image](https://github.com/user-attachments/assets/4bfbba65-b055-4852-a158-43114f239ec8)
+
+![image](https://github.com/user-attachments/assets/36a2bbf1-51b8-4ef5-b2c0-2a22401c637b)
+
+
+
+**NOTE:** Remember! The script you are running are getting run in our container in which we are running our Jenkins image. So to run python or any other package you must have to make sure that all dependencies are setup in that container. It is same as setting a setup of tech stacks like installing python etc. before building  or running the project. So don't forget to check that. Here is how you can go into your container and install you require dependencies:
+
+```bash
+sudo docker ps -a // check currently running container and copy the name of your container
+
+sudo docker exec -it container_name bash
+
+// now you are in your container:
+
+pip install packageName
+
+// do whatever you want here to run your project
+
+
+```
+
+**NOTE:** /var/jenkins_home/workspace   this directory path in jenkins container where all your project files (freestyle, pipelines) reside. You can have access them from this directory.
+
+
+# Practice task 3: Running python script from repo in a Docker cloud using Jenkins cloud agent:
+Here think cloud agent as another 3rd PC in which you will be testing, running and building your scripts. 
+
+Since we are running jenkins in a container here our cloud will also be running in another container. So there would be total 2 containers. One that will be running jenkins and other will running scripts on our project. 
+### So how would container 1 that is jenkins container will communicate with container 2?
+So the answer is that we will forward traffic from jenkins container to our cloud container. Here is how:
+
+
+## alpine/socat container to forward traffic from Jenkins to Docker Desktop on Host Machine
+
+https://stackoverflow.com/questions/47709208/how-to-find-docker-host-uri-to-be-used-in-jenkins-docker-plugin
+```
+docker run -d --restart=always -p 127.0.0.1:2376:2375 --network jenkins -v /var/run/docker.sock:/var/run/docker.sock alpine/socat tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+docker inspect <container_id>
+copy the ip address and export port (2375)
+```
+
+So you will get tcp://172.19.0.2:2375
+
+# How to create a jenkins cloud agent
+Now go to dashboard > manage Jenkins > Cloud > add cloud 
+
+here I will be using Docker cloud so simply check the docker and then it will asking you for cloud details.
+
+so in Docker Host URI you have to enter: e.g tcp://172.19.0.2:2375 (enter whatever IP of you running docker container will be that is container 2)
+
+Enable it.
+test connection.
+
+Now create a docker agent template:
+![image](https://github.com/user-attachments/assets/324a9de0-5e37-4439-a74f-78fd29402cae)
+
+![image](https://github.com/user-attachments/assets/59549f4e-b07f-418c-9516-91a3343177ac)
+
+![image](https://github.com/user-attachments/assets/3a638e44-ccc4-4ae9-a1f1-bd780c98e90d)
+
+
+Now Your Jenkins cloud agent is ready. Now you can use this cloud agent to run your scripts, your projects etc.
+
+# Run Python script in the above create cloud:
+simple open you free style project and click on configure and check the 'Restrict where this project can be run?' and add label of whatever you want.
+
+![image](https://github.com/user-attachments/assets/e2aff240-992b-4559-a2be-eea3a288442e)
+
+
+
+
+## Using my Jenkins Python Agent
+```
+docker pull devopsjourney1/myjenkinsagents:python
+```
