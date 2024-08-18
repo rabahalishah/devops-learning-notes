@@ -566,6 +566,47 @@ echo "hey" && {echo "hi; echo "I am good"}
 ```bash
 echo "heeyyy" >> myFile.txt //this command will append heeyyy in myFile.txt
 ```
+
+# Introduction to Bash Scripting
+Bash scripting is very similar to a programming language. All we have to follow some standards and then simply run the script. 
+
+## Command to know which shell you are using
+```bash
+echo $SHELL
+```
+
+## Creating first bash script
+
+```bash
+nano myfirstbashscript.sh
+
+// inside myfirstbashscript.sh
+echo "hello world"
+```
+
+## changing the file to executable
+```bash
+sudo chmod +x myfirstbashscript.sh
+```
+
+## executing script
+```bash
+./myfirstbashscript/sh
+```
+
+**NOTE:** The problem here is that if you would run more than one command then command will execute line by line which we do not want. We want to execute the file as a whole. And if we do not specify .sh extension then how would the bash know that it is a bash script?
+To answer both of the valid question we have to create a bash file in a right way.
+
+# Creating a bash file using best practices:
+```bash
+nano myfirstbashscript.sh
+
+// inside myfirstbashscript.sh
+#!/bin/bash   <---this line will turn this file into a true bash script
+echo "hello world"
+```
+
+
 # YAML File:
 YAML means "Yet another markup language"
 YAML "YAML ain't markup language"
