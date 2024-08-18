@@ -3368,8 +3368,54 @@ To provide the file you have to select:
 
 then provide git repo link.
 
-
 ## auto-trigger feature on jenkins
 **NOTE:** If you want to run you commands on push your code to git. Then look for PollSCM and provide the time there. This would be the after which pipeline will be trigger again on pushing the code to repo.
 
 If you want to give 5 min timer then you have that like this: */5 * * * *
+
+
+# Jenkins Deploying a full stack web app using Linode, Jenkins, Docker and Blue Ocean:
+Here we are going to use two servers one for Docker which will be running our Image of our application and other server would be running Jenkins that would be watching to our repo of our project. In case of any changes detected then Jenkins will run jobs (job will include running a pipeline of test, build and pushing updated image to docker hub)
+Below is the architecture diagram:
+
+![jenkins_architecture_balsamiq_diagram2](https://user-images.githubusercontent.com/10039233/190653544-48ea7cb1-bde8-4bf6-97b8-c1ff5bf854d2.png)
+
+# Step 1: Create a Linode account and create two servers:
+Here servers are nothing but are machines that will have CPU, RAM and OS.
+Setup jenkins in one server and setup Docker in other server.
+Make sure to install required dependencies in the servers such as Node, npm and git etc. By using SSH. (You will get SSH IP to get access to the terminal of the server where you can run commands to install dependencies)
+
+# Setting up jenkins Server:
+Install Docker, Docker Hub, Git and Blue Ocean (Blue Ocean is a modern UI to create CI/CD pipelines. It will also provide a UI to write CI/CD pipeline script without writing the code) Plugins by going into 'Manage Jenkins section'
+
+Now Go to the dashboard you will see Blue Ocean Section go into that and give your repo link and repo access token and then create pipeline. In add step button search for git and then add step. This will create a 'jenkinsfile' in your repo that will contain all your pipeline code.
+
+# Updating the pipeline:
+till now you have create a jenkinsfile in your repo, you have created two servers. We are currently working in jenkins server.
+
+The first stage of our Pipeline is called log and it will run the following command
+```bash
+ls -la
+```
+second stage would be the test stage and will run the following command:
+```bash
+cd you_app_repo_name && npm i && npm run test:unit
+```
+
+third stage would be the build step. This will create a docker image:
+```bash
+docker build -f curriculum-front/Dockerfile . -t fuze365/curriculum-front
+```
+4th step is to login into your Docker account so that you can push this updated image to your Docker hub account.
+
+```bash
+docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+```
+
+5th stage is to push the image to the docker hub:
+```bash
+docker push you_docker_hub:latest
+```
+
+# what we have done?
+We have deployed the app to Dockerhub and have the app server watch for changes to the docker image. It will pull whenever there are changes. (this is what we have set up now)
