@@ -606,7 +606,51 @@ nano myfirstbashscript.sh
 echo "hello world"
 ```
 
+# Using Variables in Linux:
+```
+// inside mybashscript.sh
+#!/bin/bash
 
+myname = "Rabah Ali Shah"
+now=$(date)  //there should be space between them
+
+echo "my name is $myname"
+echo "Today data is $now"
+echo "my username is $USER"
+
+```
+
+**Output**
+```bash
+
+my name is Rabah Ali Shah
+Today data is Wed Aug 21 08:32:28 PM PKT 2024
+my username is rabahalishah
+
+```
+
+- Here you can see myname is simply a variable
+- here now = $(date), now is storing an output of a command. Here $() is a subshell. Means shell inside a shell where you can run commands and can store their information.
+- here $USER is a built in environment variable. Therefore, its in Capital letter distinguishing it self from other. Therefore, it is recommended not to define user defined variables in captial letter.
+
+## Checking the list of environmental variables:
+simply run:
+
+```bash
+env
+```
+
+# Evaluating mathematical Expressions in bash:
+
+```
+expr 40 + 40
+// output 80
+
+expr 18 \* 2
+// output 36
+```
+
+-----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
 YAML "YAML ain't markup language"
