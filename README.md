@@ -650,6 +650,84 @@ expr 18 \* 2
 // output 36
 ```
 
+# If statement in Bash:
+```
+#!/bin/bash
+num=200
+
+if [ $num -eq 200 ]
+then
+ echo "yes equal"
+else
+  echo "No"
+```
+```
+#!/bin/bash
+package=/usr/bin/htop
+
+if [ -f $package ]
+then
+ echo "Yes, package exists, lets run it"
+else
+  echo "No, package does not exist. Lets install it"
+   sudo apt update && sudo apt install htop -y
+fi #<-- closing if condition
+$package
+```
+**NOTE:** Here -f is used for checking whether a file exists or not. It is same as using -d for checking whether a directory exists or not. And spaces are compulsory between []
+
+# Exit Code in bash:
+Exit codes are used to check whether a command has been successfully ran or not. If atus is 0 then it is success else fail or something went wrong. Below commands can be used to check the status code of most recent command executed. The location of $? command is extremely important in the code. It must be run right after the command of which exit code  you want to get.
+```
+echo $?
+```
+
+
+```
+#!/bin/bash
+package=akdsnsfd
+
+sudo apt update && sudo apt install $package >> installation_success.log
+
+if [ $? -eq 0 ]
+then
+ echo "$package has been installed successfully!"
+else
+ echo "$package cannot found package" >> failure.log
+fi
+```
+
+# While loop in Bash:
+
+## Real-time monitoring whether a file exists or not
+```bash
+#!/bin/bash
+file=~/abc
+
+while [ -f $file ]
+do
+  echo "file exists by $(date)"
+  sleep 0.5
+done
+
+```
+
+# universal OS update script:
+```
+#!/bin/bash
+release_file=/etc/os-release
+
+if grep -q "Arch" $release_file
+then
+   sudo pacman syu #<-- used to update packages in Arch Linux
+fi
+if grep -q "Debian" $release_file || grep -q "Ubuntu" $release_file
+then
+   sudo apt updateas
+fi
+
+
+```
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
