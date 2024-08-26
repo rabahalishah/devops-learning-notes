@@ -728,6 +728,39 @@ fi
 
 
 ```
+
+# for loop in bash
+The below script will convert all files ended with .log in logfiles directory into zip file.
+
+```
+#!/bin/bash
+
+for file in logfiles/*.log
+do
+   tar -czvf $file.tar.gz $file  #<-- tar command is used to make archive/zip file
+done
+
+
+```
+
+# Where to store you bash script?
+According to Linux FHS File hierarchy system you must store your bash files in /usr/local/bin
+
+lets move our universal update script from our home to usr/local/bin
+
+```
+sudo mv ./update /usr/local/bin
+
+#changing its permissions
+sudo chown root:root /usr/local/bin/update
+
+```
+since we have moved it to usr/local/bin now we can run update script simply by typing 'update'. Linux will automatically look in the PATH and we all know usr/bin/local is already in PATH variable
+
+**HOW TO UPDATE YOUR PATH VARIABLE**
+```
+export PATH=/your_custom_path:$PATH
+```
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
