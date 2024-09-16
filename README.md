@@ -3373,7 +3373,7 @@ Desktop virtualization is a technology that allows you to run different desktop 
 All these virtual desktops can run on a single physical server, and each team member can access their specific virtual desktop from any device, anywhere.
 
 # Chapter Jenkins:
-**NOTE:** Copied some content from devopsjourney1/jenkins-101
+
 
 Think jenkins as person who have a PC. You will provide your Source code to him. He will run commands on it that you will provide to it either in YAML or GROOVY format (those files would called pipelines). 
 
