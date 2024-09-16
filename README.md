@@ -761,6 +761,43 @@ since we have moved it to usr/local/bin now we can run update script simply by t
 ```
 export PATH=/your_custom_path:$PATH
 ```
+
+# Dealing with Data Streams and Error Streams 
+
+In linux when a command got successful we get an exit code of 0 otherwise any non-zero value.
+Error streams are nothing but the errors that we see when we run a command such as permission-denied errors etc.
+We can simply check it by the following command:
+
+```bash
+echo $?
+```
+
+But in case we ran a command let say find command:
+```bash
+find /etc -type f
+```
+this find command is simply gonna find all the files present inside /etc folder. You would see some error streams such as permission denied etc. While writing scripts we have to make sure that we do not get any kind of interaction all process should be automated so these error streams should not be shown. So we can redirect them as well. 
+
+We can do it by using **2>** symbol, but if we want to redirect our data streams we can use it like either this **>** or **1>**
+we can also redirect both data streams and error streams as well using **&>**.
+
+```bash
+find /etc -type f 2> ./errorstream.txt
+```
+```bash
+find /etc -type f 1> ./datastream.txt
+# this will redirect datastream to datastream.txt
+
+or
+
+find /etc -type f > ./datastream.txt
+#both are same.
+```
+```bash
+find /etc -type f &> ./errorAndDataStream.txt
+
+#This will redirect both data and error stream inside errorAndDataStream.txt
+```
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
