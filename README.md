@@ -798,6 +798,70 @@ find /etc -type f &> ./errorAndDataStream.txt
 
 #This will redirect both data and error stream inside errorAndDataStream.txt
 ```
+
+# Creating Functions in bash
+```bash
+#!/bin/bash
+
+myFirstFunction() {
+ echo "yeah you got it"
+}
+
+myFirstFunction
+
+```
+
+**NOTE:** In bash we are invoking function just by its name we are not using any ()
+
+## Passing Arguments to bash functions:
+In Linux bash scripting, you can pass arguments to a function in the same way that you pass arguments to a script. Here's how you can do it:
+
+```bash
+function_name() {
+    # Access the arguments using $1, $2, ..., $n
+    echo "First argument: $1"
+    echo "Second argument: $2"
+    # You can use as many arguments as needed
+}
+
+# Call the function and pass arguments
+function_name arg1 arg2
+```
+
+### Example:
+
+```bash
+greet() {
+    echo "Hello, $1!"
+    echo "You are $2 years old."
+}
+
+# Calling the function with arguments
+greet "Rabah" 21
+```
+
+### Output:
+```
+Hello, Rabah!
+You are 21 years old.
+```
+
+In the above example:
+- `$1` refers to the first argument (`"Rabah"`)
+- `$2` refers to the second argument (`21`)
+
+You can access more arguments using `$3`, `$4`, and so on, depending on how many you pass.
+### Example 2:
+```bash
+#!/bin/bash
+myFirstSumFunction() {
+ sum=$(expr $1 + $2)
+ echo "The sum of $1 and $2 is $sum"
+}
+
+myFirstSumFunction 2 4
+```
+
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
