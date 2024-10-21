@@ -1271,6 +1271,12 @@ docker run -p host_port:container_port image_name
 docker run -p 8080:80 my_docker_image //8080:80 specifies that port 8080 on the host machine should be mapped to port 80 on the container
 
 ```
+```bash
+docker compose up // It starts your application. This command looks at the `docker-compose.yml` file, creates the necessary containers, networks, and volumes, and runs them together as described in the file. If the containers are already running, it just ensures everything is up and running.
+```
+```bash
+docker compose down // It stops and removes everything that was started by `docker compose up`, including containers, networks, and volumes (unless specified otherwise). This essentially cleans up your application environment.
+```
 
 # Connecting two containers
 ```bash
