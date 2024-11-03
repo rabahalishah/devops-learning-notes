@@ -910,6 +910,15 @@ echo "Tipu mera pyara sa dost hai" >> ~/playground/lab/bash_scripting/output.log
 
 **NOTE:** Here, the script won't show the output. But will run in the background. So here I am storing my output inside output.log file.
 now
+
+## command to check how many jobs are pending
+```
+atq
+```
+## command to remove any specific job
+```
+atrm <serial_no. of the job>
+```
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
