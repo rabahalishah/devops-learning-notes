@@ -861,7 +861,55 @@ myFirstSumFunction() {
 
 myFirstSumFunction 2 4
 ```
+# Case in bash scripting:
+```bash
+#!/bin/bash
 
+finished=0
+
+while [ $finished -ne 1 ]
+do
+  echo "Which is your favourite linux distribution?"
+
+  echo "1 - Debain"
+  echo "2 - Ubunutu"
+  echo "3 - exit the script"
+
+  read distro;
+
+  case $distro in
+     1) echo "Good choice";;
+     2) echo "us bro";;
+     3) finished=1;;
+     *) echo "please choose an appropriate option";;
+  esac
+done
+
+echo "Thank you so much for you response"
+
+```
+
+# Scheduling Jobs in Linux:
+You can run scripts on your specified time in the background using 'at' module
+
+```bash
+sudo apt install at
+```
+```bash
+ at 06:09pm Nov 3 -f ~/playground/lab/bash_scripting/scheduling_job.sh
+```
+
+```bash
+// In my scheduling_job.sh
+#!/bin/bash
+
+echo "Time $(date)" >> ~/playground/lab/bash_scripting/output.log
+echo "Tipu mera pyara sa dost hai" >> ~/playground/lab/bash_scripting/output.log
+
+```
+
+**NOTE:** Here, the script won't show the output. But will run in the background. So here I am storing my output inside output.log file.
+now
 -----------------------------------------------
 # YAML File:
 YAML means "Yet another markup language"
